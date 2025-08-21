@@ -16,7 +16,10 @@ FROM (
         name,
         job_country,
         salary_year_avg,
-        RANK() OVER (PARTITION BY job_country ORDER BY salary_year_avg DESC) AS rnk
+        RANK() OVER (
+	PARTITION BY job_country 
+	ORDER BY salary_year_avg DESC
+     ) AS rnk
     FROM
         job_postings_fact
     LEFT JOIN company_dim ON company_dim.company_id = job_postings_fact.company_id
